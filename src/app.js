@@ -63,16 +63,43 @@ app.get('/help', (req, res) => {
 
 
 // Update weather endpoint to accept address
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 app.get('/weather', (req, res) => {
     if(!req.query.address) {
         return res.send({
             error: 'Please add an address term !'
         })
     }
-    res.send({
-        location: req.query.address,
-        weather: 'Humid'
+
+    geocode(req.query.address, (error, {latitude, longitude}) => {
+        // above line we have used destructuring 
+        if(error) {
+            return res.send({
+                error // shorthand
+            })
+        }
+        //console.log('Geocode chaining step1:' +response.longitude)
+    
+        forecast(latitude, longitude, (error, data) => {
+            if(error) {
+                return res.send({
+                    error: error
+                })
+            }
+            res.send({
+                location: req.query.address,
+                weather: data,
+                longitude,
+                latitude
+            })
+            
+        })
     })
+
+
+
+    
 })
 
 app.get('/products', (req, res) => {
