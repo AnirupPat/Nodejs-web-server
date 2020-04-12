@@ -9,19 +9,28 @@ const app = express()
 
 // To set up the server to send a response, by using the get method
 app.get('', (req, res) => {
-    res.send('Hello Express.. !')
+    res.send('<h1>Weather</h1>')
 })
 
 app.get('/help', (req, res) => {
-    res.send('Help Page')
+    res.send([{
+        name: 'Anirup',
+        age: 29
+    },{
+        name: 'Sarah',
+        age: 29
+    }])
 })
 
 app.get('/about', (req, res) => {
-    res.send('About Page')
+    res.send('<h1>About Us</h1>')
 })
 
 app.get('/weather', (req, res) => {
-    res.send('Weather page')
+    res.send({
+        location: 'India',
+        weather: 'Humid'
+    })
 })
 
 // currently the server is not up and running
