@@ -4,13 +4,20 @@ const express = require('express')
 // To generate the app we need to call express as below
 const app = express()
 
+// Define paths for express config
+const publicDir = path.join(__dirname,'..', '/public')
+const viewsPath = path.join(__dirname, '../templates')
+
+
 // app.com
 // app.com/help
 // app.com/about
 
+// setup handlebar engine and view location
 app.set('view engine', 'hbs')
+app.set('views', viewsPath)
 
-const publicDir = path.join(__dirname,'..', '/public')
+// Set up static directory to serve
 app.use(express.static(publicDir))
 
 app.get('', (req, res) => {
@@ -69,7 +76,7 @@ console.log(__dirname)
 console.log(__filename)
 
 
-console.log(path.join(__dirname,'..', '/public'))
+
 
 // Dynamic pages with templating
 // Handlebars will allow us to render dynamic documents as oppose to static ones
