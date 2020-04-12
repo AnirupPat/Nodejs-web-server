@@ -72,7 +72,8 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    geocode(req.query.address, (error, {latitude, longitude}) => {
+    geocode(req.query.address, (error, {latitude, longitude} = {}) => {
+        // default obj for the destructuring, when no data will be provided.. 
         // above line we have used destructuring 
         if(error) {
             return res.send({
