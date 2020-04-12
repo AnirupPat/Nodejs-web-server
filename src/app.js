@@ -62,11 +62,32 @@ app.get('/help', (req, res) => {
 // })
 
 
-
+// Update weather endpoint to accept address
 app.get('/weather', (req, res) => {
+    if(!req.query.address) {
+        return res.send({
+            error: 'Please add an address term !'
+        })
+    }
     res.send({
-        location: 'India',
+        location: req.query.address,
         weather: 'Humid'
+    })
+})
+
+app.get('/products', (req, res) => {
+    console.log(req.query)
+    // the log will give { search: 'games' }, when  we put this in url
+    // http://localhost:3000/products?search=games
+    console.log(req.query.search) // o/p is games
+
+    if(!req.query.search) {
+        return res.send({
+            error: 'You must provide a search term !'
+        })
+    }
+    res.send({
+        products: []
     })
 })
 
