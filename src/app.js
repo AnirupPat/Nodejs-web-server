@@ -7,8 +7,31 @@ const app = express()
 // app.com
 // app.com/help
 // app.com/about
+
+app.set('view engine', 'hbs')
+
 const publicDir = path.join(__dirname,'..', '/public')
 app.use(express.static(publicDir))
+
+app.get('', (req, res) => {
+    res.render('index', {
+        title: 'Weather App',
+        name: 'Anirup'
+    })
+})
+
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About Us',
+        name: 'Sharan'
+    })
+})
+
+app.get('/help', (req, res) => {
+    res.render('help', {
+        msg: 'This is a help text !'
+    })
+})
 
 // let these below code be commented
 // To set up the server to send a response, by using the get method
@@ -47,3 +70,9 @@ console.log(__filename)
 
 
 console.log(path.join(__dirname,'..', '/public'))
+
+// Dynamic pages with templating
+// Handlebars will allow us to render dynamic documents as oppose to static ones
+// and it allows us to easily create codes that we can use across pages
+// like header and footer components 
+// npm i hbs 
