@@ -1,12 +1,14 @@
 const path = require('path') // we dont need to install it as its a core node module.. 
 const express = require('express')
+const hbs = require('hbs')
 // express is actually a function, and we call express to create a new express app
 // To generate the app we need to call express as below
 const app = express()
 
 // Define paths for express config
 const publicDir = path.join(__dirname,'..', '/public')
-const viewsPath = path.join(__dirname, '../templates')
+const viewsPath = path.join(__dirname, '../templates/views')
+const viewPartialsPath = path.join(__dirname, '../templates/partials')
 
 
 // app.com
@@ -16,6 +18,7 @@ const viewsPath = path.join(__dirname, '../templates')
 // setup handlebar engine and view location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
+hbs.registerPartials(viewPartialsPath)
 
 // Set up static directory to serve
 app.use(express.static(publicDir))
@@ -36,7 +39,9 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
     res.render('help', {
-        msg: 'This is a help text !'
+        msg: 'This is a help text !',
+        title: 'Help',
+        name: 'Sangram'
     })
 })
 
@@ -83,3 +88,5 @@ console.log(__filename)
 // and it allows us to easily create codes that we can use across pages
 // like header and footer components 
 // npm i hbs 
+
+// nodemon src/app.js -e js,hbs - to be used if hbs files to render the app on change 
