@@ -1,5 +1,5 @@
 console.log('Client side JS file is loaded')
-
+console.log('Try to push from CLI test')
 fetch('http://puzzle.mead.io/puzzle').then((response) => {
     response.json().then((data) => {
         console.log(data)
