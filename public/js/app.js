@@ -38,21 +38,19 @@ weatherFrom.addEventListener('submit', (e) => {
     console.log(location)
 
     fetch('http://localhost:3000/weather?address='+location).then((response) => {
-    response.json().then((data) => {
-        messageOne.textContent = ''
-        messageTwo.textContent = ''
-        if(data.error) {
-            console.log(data.error)
-            messageTwo.textContent = data.error
-        } else {
-            console.log(data.location)
-            console.log(data.weather)
+        response.json().then((data) => {
+            messageOne.textContent = ''
+            messageTwo.textContent = ''
+            if(data.error) {
+                console.log(data.error)
+                messageTwo.textContent = data.error
+            } else {
+                console.log(data.location)
+                console.log(data.weather)
 
-            messageOne.textContent = data.weather
-        }
+                messageOne.textContent = data.weather
+            }
+        })
     })
-})
-
-
 })
 
