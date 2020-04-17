@@ -4,6 +4,7 @@ const hbs = require('hbs')
 // express is actually a function, and we call express to create a new express app
 // To generate the app we need to call express as below
 const app = express()
+const port = process.env.PORT || 3000
 
 // Define paths for express config
 const publicDir = path.join(__dirname,'..', '/public')
@@ -134,7 +135,7 @@ app.get('*', (req, res) => {
 })
 
 // currently the server is not up and running
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('App is running on port 3000.')
 }) // this starts up the server and it will run in a specific port
 

@@ -37,7 +37,11 @@ weatherFrom.addEventListener('submit', (e) => {
     const location = search.value
     console.log(location)
 
-    fetch('http://localhost:3000/weather?address='+location).then((response) => {
+    fetch('/weather?address='+location).then((response) => {
+        // removing this from above
+        // http://localhost:3000
+        // cause we are running on heroku
+        
         response.json().then((data) => {
             messageOne.textContent = ''
             messageTwo.textContent = ''
