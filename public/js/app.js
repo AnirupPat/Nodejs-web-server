@@ -26,6 +26,8 @@ fetch('http://localhost:3000/weather?address=Bangalore').then((response) => {
 
 const weatherFrom = document.querySelector('form')
 const search = document.querySelector('input')
+const messageOne = document.querySelector('#message-one')
+const messageTwo = document.querySelector('#message-two')
 
 weatherFrom.addEventListener('submit', (e) => {
     e.preventDefault() // its going to prevent the default behaviour of refreshing
@@ -37,11 +39,16 @@ weatherFrom.addEventListener('submit', (e) => {
 
     fetch('http://localhost:3000/weather?address='+location).then((response) => {
     response.json().then((data) => {
+        messageOne.textContent = ''
+        messageTwo.textContent = ''
         if(data.error) {
             console.log(data.error)
+            messageTwo.textContent = data.error
         } else {
             console.log(data.location)
             console.log(data.weather)
+
+            messageOne.textContent = data.weather
         }
     })
 })
